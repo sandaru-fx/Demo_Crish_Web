@@ -363,7 +363,9 @@ img{display:block;width:100%}
 .featured-review-card .stars{color:var(--gold);letter-spacing:.13em;margin:25px 0}
 .featured-review-card blockquote{font:400 31px/1.4 var(--serif);margin:0 0 30px}
 .featured-author{display:flex;align-items:center;gap:14px}
-.author-avatar,.review-person>span{display:grid;place-items:center;width:43px;height:43px;border-radius:50%;background:var(--green);color:#fff;font:600 10px var(--sans);letter-spacing:.06em}
+.author-avatar,.review-person>span,.review-avatar{display:grid;place-items:center;width:43px;height:43px;border-radius:50%;background:var(--green);color:#fff;font:600 10px var(--sans);letter-spacing:.06em;overflow:hidden;flex-shrink:0}
+.author-avatar img,.review-person>span img,.review-avatar img{width:100%;height:100%;object-fit:cover}
+.author-avatar.has-photo,.review-person>span.has-photo,.review-avatar.has-photo{background:transparent;border:0;padding:0}
 .featured-author b,.featured-author small,.review-person b,.review-person small{display:block}
 .featured-author b,.review-person b{font:600 10px var(--sans);letter-spacing:.13em}
 .featured-author small,.review-person small{font-size:11px;color:var(--muted);margin-top:3px}
@@ -380,6 +382,7 @@ img{display:block;width:100%}
 .premium-review-card blockquote{font:400 24px/1.48 var(--serif);margin:42px 0 35px;flex:1}
 .review-person{display:flex;align-items:center;gap:13px}
 .review-person>span{width:38px;height:38px;background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.review-person>span.has-photo,.review-avatar.has-photo{border:0;width:44px;height:44px}
 .corner{position:absolute;width:0;height:0;opacity:0;transition:.45s}
 .corner-one{top:9px;left:9px;border-top:18px solid var(--gold);border-right:18px solid transparent}
 .corner-two{right:9px;bottom:9px;border-bottom:18px solid var(--green);border-left:18px solid transparent}
