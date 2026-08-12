@@ -53,7 +53,10 @@ const defaultReviewPhotos={
   'Amelia Ross':'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=240&h=240&q=80',
   'Daniel Cole':'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=240&h=240&q=80',
   'Sophie Bennett':'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=240&h=240&q=80',
-  'James Wilson':'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&h=240&q=80'
+  'James Wilson':'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&h=240&q=80',
+  'Ryan Patel':'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=240&h=240&q=80',
+  'Nina Alvarez':'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=240&h=240&q=80',
+  'Chris Nguyen':'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=240&h=240&q=80'
 };
 if(publicReviews&&Array.isArray(adminData?.reviews)&&adminData.reviews.length){
   const reviewsForPage=adminData.reviews.map((r,i)=>({...r,photo:r.photo||defaultReviewPhotos[r.name]||Object.values(defaultReviewPhotos)[i]||''}));
