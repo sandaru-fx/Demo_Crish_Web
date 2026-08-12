@@ -47,7 +47,6 @@ img{display:block;width:100%}
 .hero-content:after{content:'';position:absolute;left:-34px;top:150px;width:1px;height:290px;background:linear-gradient(transparent,#d9c495,transparent);opacity:.65}
 .hero .text-link.light{color:#fff;border-color:rgba(255,255,255,.35)}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,29,23,.86) 0%,rgba(8,29,23,.54) 48%,rgba(8,29,23,.12) 100%),linear-gradient(0deg,rgba(8,29,23,.5),transparent 45%)}
-#luxury-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;opacity:.52;pointer-events:none}
 .hero-content{position:relative;z-index:3;padding-top:100px}
 .eyebrow,.kicker{display:flex;align-items:center;gap:12px;text-transform:uppercase;letter-spacing:.21em;font:600 10px var(--sans)}
 .eyebrow:before,.kicker:before{content:"";width:36px;height:1px;background:var(--gold)}
