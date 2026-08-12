@@ -19,6 +19,11 @@
         <button class="active" data-panel-target="overview"><i>⌂</i><b>Overview</b></button>
         <button data-panel-target="carousel"><i>◫</i><b>Hero carousel</b><em data-slide-count>5</em></button>
         <button data-panel-target="reviews"><i>★</i><b>Client reviews</b><em data-review-count>6</em></button>
+        <button data-panel-target="catalog"><i>▦</i><b>Services & areas</b><em data-service-count>6</em></button>
+        <span>Business</span>
+        <button data-panel-target="enquiries"><i>✉</i><b>Quote enquiries</b><em data-enquiry-count>4</em></button>
+        <button data-panel-target="applications"><i>✓</i><b>Applications</b><em data-application-count>3</em></button>
+        <button data-panel-target="media"><i>▧</i><b>Media library</b><em data-media-count>4</em></button>
         <button data-panel-target="contact"><i>◎</i><b>Contact details</b></button>
         <button data-panel-target="settings"><i>⚙</i><b>Site settings</b></button>
       </nav>
@@ -42,6 +47,30 @@
       <section class="admin-panel" data-panel="reviews">
         <div class="panel-heading"><div><span class="overline">Social proof</span><h1>Client reviews.</h1><p>Add, edit and curate the testimonials published on the reviews page.</p></div><button class="primary-button" data-add-review>+ Add new review</button></div>
         <div class="carousel-admin-layout"><div class="review-admin-list" data-review-list></div><form class="editor-card" data-review-editor hidden><div class="editor-head"><div><span class="overline">Review editor</span><h2 data-review-editor-title>Edit client review</h2></div><button type="button" data-close-review-editor>×</button></div><input type="hidden" name="index"><label><span>Client name</span><input required name="name" placeholder="Olivia Hart"></label><label><span>Position / role</span><input required name="role" placeholder="Operations Director"></label><label><span>Industry category</span><input required name="category" placeholder="Corporate"></label><label><span>Review</span><textarea required name="quote" rows="6" placeholder="Write the client testimonial..."></textarea></label><label><span>Star rating</span><select name="rating"><option value="5">5 stars — Exceptional</option><option value="4">4 stars — Very good</option><option value="3">3 stars — Good</option><option value="2">2 stars</option><option value="1">1 star</option></select></label><div class="editor-actions"><button class="primary-button" type="submit">Publish review</button><button class="text-button" type="button" data-close-review-editor>Cancel</button></div></form></div>
+      </section>
+
+      <section class="admin-panel" data-panel="catalog">
+        <div class="panel-heading"><div><span class="overline">Website catalogue</span><h1>Services & areas.</h1><p>Control the services and Melbourne locations presented to potential clients.</p></div><button class="primary-button" data-add-catalog>+ Add item</button></div>
+        <div class="catalog-tabs"><button class="active" data-catalog-tab="services">Services</button><button data-catalog-tab="areas">Areas we serve</button></div>
+        <div class="carousel-admin-layout"><div class="catalog-list" data-catalog-list></div><form class="editor-card" data-catalog-editor hidden><div class="editor-head"><div><span class="overline">Catalogue editor</span><h2 data-catalog-title>Edit item</h2></div><button type="button" data-close-catalog>×</button></div><input type="hidden" name="index"><input type="hidden" name="type"><label><span>Name</span><input required name="name"></label><label><span>Category / region</span><input required name="meta"></label><label><span>Description</span><textarea required name="description" rows="5"></textarea></label><label class="catalog-image-field"><span>Image URL</span><input name="image" type="url" placeholder="https://..."></label><label class="catalog-active"><input type="checkbox" name="active" checked><span>Published on website</span></label><div class="editor-actions"><button class="primary-button" type="submit">Save item</button><button class="text-button" type="button" data-close-catalog>Cancel</button></div></form></div>
+      </section>
+
+      <section class="admin-panel" data-panel="enquiries">
+        <div class="panel-heading"><div><span class="overline">Sales pipeline</span><h1>Quote enquiries.</h1><p>Track new opportunities from first contact through to a confirmed client.</p></div><button class="outline-button" data-export-enquiries>Export CSV ↓</button></div>
+        <div class="pipeline-summary"><div><span>New</span><b data-pipeline="New">0</b></div><div><span>Contacted</span><b data-pipeline="Contacted">0</b></div><div><span>Quoted</span><b data-pipeline="Quoted">0</b></div><div><span>Won</span><b data-pipeline="Won">0</b></div></div>
+        <div class="manager-toolbar"><input data-enquiry-search placeholder="Search client, company or service..."><select data-enquiry-filter><option value="All">All statuses</option><option>New</option><option>Contacted</option><option>Quoted</option><option>Won</option><option>Lost</option></select></div>
+        <div class="business-list" data-enquiry-list></div>
+      </section>
+
+      <section class="admin-panel" data-panel="applications">
+        <div class="panel-heading"><div><span class="overline">People & compliance</span><h1>Applications.</h1><p>Review contractor and employee registrations in one organised queue.</p></div><a class="outline-button" href="registration.html" target="_blank">View application form ↗</a></div>
+        <div class="manager-toolbar"><input data-application-search placeholder="Search applicant or role..."><select data-application-filter><option value="All">All applications</option><option>Pending</option><option>Approved</option><option>Needs documents</option><option>Rejected</option></select></div>
+        <div class="business-list" data-application-list></div>
+      </section>
+
+      <section class="admin-panel" data-panel="media">
+        <div class="panel-heading"><div><span class="overline">Visual assets</span><h1>Media library.</h1><p>Keep reusable website imagery together. Demo uploads remain in this browser.</p></div><label class="primary-button media-upload">+ Upload image<input type="file" accept="image/*" data-media-upload></label></div>
+        <div class="media-filter"><button class="active">All assets</button><span data-storage-note>Browser demo storage</span></div><div class="media-grid" data-media-grid></div>
       </section>
 
       <section class="admin-panel" data-panel="contact">
