@@ -47,7 +47,42 @@ let adminData=null;try{adminData=JSON.parse(localStorage.getItem('cfsWebsiteData
 const adminCarousel=document.querySelector('[data-hero-carousel]');
 if(adminCarousel&&adminData?.slides?.length){adminCarousel.innerHTML='';adminData.slides.forEach((s,i)=>{const slide=document.createElement('div');slide.className=`hero-slide${i===0?' active':''}`;slide.dataset.kicker=s.kicker;slide.dataset.title=`${s.title1}|${s.title2}`;slide.dataset.copy=s.copy;slide.dataset.link=s.link;slide.dataset.cta=s.cta;slide.style.setProperty('--slide-image',`url("${String(s.image).replace(/["\\]/g,'')}")`);adminCarousel.appendChild(slide)});const first=adminData.slides[0],heroContent=document.querySelector('.hero-content');if(heroContent){const kickerEl=heroContent.querySelector('[data-hero-kicker]'),titleEl=heroContent.querySelector('[data-hero-title]'),copyEl=heroContent.querySelector('[data-hero-copy]');if(kickerEl)kickerEl.textContent=first.kicker;if(titleEl)titleEl.innerHTML=`${first.title1}<br><em>${first.title2}</em>`;if(copyEl)copyEl.textContent=first.copy}}
 const publicReviews=document.querySelector('.premium-reviews-grid');
-if(publicReviews&&Array.isArray(adminData?.reviews)){publicReviews.innerHTML='';adminData.reviews.forEach(r=>{const card=document.createElement('article');card.className='premium-review-card reveal';const top=document.createElement('div');top.className='review-card-top';const tag=document.createElement('span');tag.className='industry-tag';tag.textContent=r.category;const stars=document.createElement('span');stars.className='stars';stars.textContent='★'.repeat(Math.max(1,Math.min(5,Number(r.rating)||5)));top.append(tag,stars);const quote=document.createElement('blockquote');quote.textContent=`“${r.quote}”`;const person=document.createElement('div');person.className='review-person';const avatar=document.createElement('span');avatar.className='review-avatar';if(r.photo){const img=document.createElement('img');img.src=r.photo;img.alt=r.name||'Client photo';img.loading='lazy';avatar.append(img);avatar.classList.add('has-photo')}else avatar.textContent=String(r.name).trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||'').join('');const info=document.createElement('div');const name=document.createElement('b');name.textContent=String(r.name).toUpperCase();const role=document.createElement('small');role.textContent=r.role;info.append(name,role);person.append(avatar,info);const c1=document.createElement('i'),c2=document.createElement('i');c1.className='corner corner-one';c2.className='corner corner-two';card.append(top,quote,person,c1,c2);publicReviews.append(card);io.observe(card)});const featured=document.querySelector('.featured-author');if(featured&&adminData.reviews[0]){const first=adminData.reviews[0],avatar=featured.querySelector('.author-avatar');if(avatar){avatar.textContent='';avatar.classList.toggle('has-photo',!!first.photo);if(first.photo){const img=document.createElement('img');img.src=first.photo;img.alt=first.name||'Client photo';img.loading='lazy';avatar.append(img)}else avatar.textContent=String(first.name).trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||'').join('')}const nameEl=featured.querySelector('b'),roleEl=featured.querySelector('small');if(nameEl)nameEl.textContent=String(first.name).toUpperCase();if(roleEl)roleEl.textContent=first.role}}
+const defaultReviewPhotos={
+  'Olivia Hart':'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=240&h=240&q=80',
+  'Marcus Lee':'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=240&h=240&q=80',
+  'Amelia Ross':'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=240&h=240&q=80',
+  'Daniel Cole':'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=240&h=240&q=80',
+  'Sophie Bennett':'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=240&h=240&q=80',
+  'James Wilson':'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&h=240&q=80'
+};
+if(publicReviews&&Array.isArray(adminData?.reviews)&&adminData.reviews.length){
+  const reviewsForPage=adminData.reviews.map((r,i)=>({...r,photo:r.photo||defaultReviewPhotos[r.name]||Object.values(defaultReviewPhotos)[i]||''}));
+  publicReviews.innerHTML='';
+  reviewsForPage.forEach(r=>{
+    const card=document.createElement('article');card.className='premium-review-card reveal';
+    const top=document.createElement('div');top.className='review-card-top';
+    const tag=document.createElement('span');tag.className='industry-tag';tag.textContent=r.category;
+    const stars=document.createElement('span');stars.className='stars';stars.textContent='★'.repeat(Math.max(1,Math.min(5,Number(r.rating)||5)));
+    top.append(tag,stars);
+    const quote=document.createElement('blockquote');quote.textContent=`“${r.quote}”`;
+    const person=document.createElement('div');person.className='review-person';
+    const avatar=document.createElement('span');avatar.className='review-avatar';
+    if(r.photo){const img=document.createElement('img');img.src=r.photo;img.alt=r.name||'Client photo';img.loading='lazy';avatar.append(img);avatar.classList.add('has-photo')}
+    else avatar.textContent=String(r.name).trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||'').join('');
+    const info=document.createElement('div');const name=document.createElement('b');name.textContent=String(r.name).toUpperCase();const role=document.createElement('small');role.textContent=r.role;info.append(name,role);
+    person.append(avatar,info);
+    const c1=document.createElement('i'),c2=document.createElement('i');c1.className='corner corner-one';c2.className='corner corner-two';
+    card.append(top,quote,person,c1,c2);publicReviews.append(card);io.observe(card);
+  });
+  const featured=document.querySelector('.featured-author');
+  if(featured&&reviewsForPage[0]){
+    const first=reviewsForPage[0],avatar=featured.querySelector('.author-avatar');
+    if(avatar){avatar.textContent='';avatar.classList.toggle('has-photo',!!first.photo);if(first.photo){const img=document.createElement('img');img.src=first.photo;img.alt=first.name||'Client photo';img.loading='lazy';avatar.append(img)}else avatar.textContent=String(first.name).trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||'').join('')}
+    const nameEl=featured.querySelector('b'),roleEl=featured.querySelector('small');
+    if(nameEl)nameEl.textContent=String(first.name).toUpperCase();
+    if(roleEl)roleEl.textContent=first.role;
+  }
+}
 const heroCarousel=document.querySelector('[data-hero-carousel]');
 if(heroCarousel){const slides=[...heroCarousel.querySelectorAll('.hero-slide')],dotsWrap=document.querySelector('[data-hero-dots]'),content=document.querySelector('.hero-content'),kicker=document.querySelector('[data-hero-kicker]'),title=document.querySelector('[data-hero-title]'),copy=document.querySelector('[data-hero-copy]'),link=document.querySelector('[data-hero-link]'),cta=document.querySelector('[data-hero-cta]'),number=document.querySelector('[data-hero-number]');let current=0,timer,swapTimer;slides.forEach((_,i)=>{const dot=document.createElement('i');dot.classList.toggle('active',i===0);dot.setAttribute('role','button');dot.setAttribute('aria-label',`Show service ${i+1}`);dotsWrap?.appendChild(dot)});const dots=[...(dotsWrap?.children||[])];const updateContent=slide=>{if(kicker)kicker.textContent=slide.dataset.kicker||'';const parts=(slide.dataset.title||'').split('|');if(title)title.innerHTML=`${parts[0]||''}${parts[1]?`<br><em>${parts[1]}</em>`:''}`;if(copy)copy.textContent=slide.dataset.copy||'';if(link)link.href=slide.dataset.link||'cleaning-services.html';if(cta)cta.textContent=slide.dataset.cta||'Explore services';if(number)number.textContent=String(current+1).padStart(2,'0')};const show=i=>{current=(i+slides.length)%slides.length;slides.forEach((slide,n)=>slide.classList.toggle('active',n===current));dots.forEach((dot,n)=>dot.classList.toggle('active',n===current));content?.classList.add('changing');clearTimeout(swapTimer);swapTimer=setTimeout(()=>{updateContent(slides[current]);content?.classList.remove('changing')},280)};const play=()=>{clearInterval(timer);timer=setInterval(()=>show(current+1),6500)};document.querySelector('[data-hero-prev]')?.addEventListener('click',()=>{show(current-1);play()});document.querySelector('[data-hero-next]')?.addEventListener('click',()=>{show(current+1);play()});dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);play()}));play()}
 const signature=document.querySelector('[data-signature]');
